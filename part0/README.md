@@ -6,12 +6,12 @@
 
 ### 0.4: new note:
 
-![new_note](./exercise_0.4.png)
+![new_note](./exercise0.4.png)
 
 ### 0.5: Single page application
 
-![get_single_page_app](./exercise_0.5.png)
+![get_single_page_app](./exercise0.5.png)
 
 ### 0.6: New note:
 
-![single_page_app_new_note](./exercise_0.6.png)
+![single_page_app_new_note](./exercise0.6.png)
