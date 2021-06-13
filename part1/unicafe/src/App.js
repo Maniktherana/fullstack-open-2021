@@ -12,24 +12,23 @@ const Button = ({ handleClick, text}) => (
   </button>
 ) 
 
-const StatisticHeading = () => {
-  return (
-    <h1>statistics</h1>
-  )
-}
-
-const StatisticContent = ({all, stats}) => {
+const Statistics = ({all, stats}) => {
   if (all === 0) {
     return <p>No feedback given</p>
   } else {
     return (
       <div>
-        <Statistic name={stats[0].name} calculation={stats[0].calculation} />
-        <Statistic name={stats[1].name} calculation={stats[1].calculation} />
-        <Statistic name={stats[2].name} calculation={stats[2].calculation} />
-        <Statistic name={stats[3].name} calculation={stats[3].calculation} />
-        <Statistic name={stats[4].name} calculation={stats[4].calculation} />
-        <Statistic name={stats[5].name} calculation={stats[5].calculation} />
+        <h1>statistics</h1>
+        <table>
+          <tbody>
+            <Statistic name={stats[0].name} calculation={stats[0].calculation} />
+            <Statistic name={stats[1].name} calculation={stats[1].calculation} />
+            <Statistic name={stats[2].name} calculation={stats[2].calculation} />
+            <Statistic name={stats[3].name} calculation={stats[3].calculation} />
+            <Statistic name={stats[4].name} calculation={stats[4].calculation} />
+            <Statistic name={stats[5].name} calculation={stats[5].calculation} />
+          </tbody>
+        </table>
     </div>
     )
   }
@@ -37,9 +36,10 @@ const StatisticContent = ({all, stats}) => {
 
 const Statistic = (props) => {
   return (
-    <p>
-      {props.name}{' '}{props.calculation}
-    </p>
+    <tr>
+      <td>{props.name}</td>
+      <td>{props.calculation}</td>
+    </tr>
   )
 }
 
@@ -75,7 +75,7 @@ const App = () => {
     },
     {
       name:"positive",
-      calculation: `${(good/all) * 100}%`
+      calculation: `${(good/all) * 100} %`
     }
   ]
 
@@ -102,9 +102,7 @@ const App = () => {
       <Button handleClick={handleNeutralClick} text='neutral' />
       <Button handleClick={handleBadClick} text='bad' />
 
-      <StatisticHeading />
-
-      <StatisticContent all={all} stats={stats}/>
+      <Statistics all={all} stats={stats}/>
     </div>
   )
 }
