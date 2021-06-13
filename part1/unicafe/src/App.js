@@ -12,6 +12,7 @@ const Button = ({ handleClick, text}) => (
   </button>
 ) 
 
+// display statisitcs in table format
 const Statistics = ({all, stats}) => {
   if (all === 0) {
     return <p>No feedback given</p>
