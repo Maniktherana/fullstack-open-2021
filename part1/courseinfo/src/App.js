@@ -33,6 +33,7 @@ const Part = (props) => {
   )
 }
 
+// contains everything
 const App = () => {
   const course = {
     name: 'Half Stack application development',
