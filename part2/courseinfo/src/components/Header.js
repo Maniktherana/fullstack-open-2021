@@ -1,8 +1,8 @@
 import React from 'react'
 
 const Header = ( {course} ) =>
-  <h1>
+  <h2>
     {course}
-  </h1>
+  </h2>
 
 export default Header

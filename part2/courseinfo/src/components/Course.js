@@ -5,6 +5,7 @@ import Total from './Total'
 
 const Course = ( {courses} ) =>
   <div>
+    <h1>Web development curriculum</h1>
     {courses.map(course =>
       <div key={course.id}>
         <Header course={course.name} />
