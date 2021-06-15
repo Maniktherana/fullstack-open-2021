@@ -13,6 +13,9 @@ const App = (props) => {
   const [exists, setExists] = useState(false)
   const [filter, setFilter] = useState('')
 
+
+  const namesToShow = names.filter(name => name.content.toLowerCase().includes(filter))
+
   const addName = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
@@ -32,15 +35,12 @@ const App = (props) => {
   }
 
   const handleNameChange = (event) => {
-    // console.log(event.target.value)
     setNewName(event.target.value)
     doesNameExist(event.target.value)
   }
 
   const handleNumberChange = (event) => {
-    // console.log(event.target.value)
     setNewNumber(event.target.value)
-    // doesNameExist(event.target.value)
   }
 
   const handleFilterChange = (event) => {
@@ -50,14 +50,12 @@ const App = (props) => {
   const doesNameExist = (txt) => {
     let tempState = false
     names.forEach(element => {
-      // console.log(element.content)
       if(element.content === txt) {
         tempState = true
       }
     })
     setExists(tempState)
   }
-
   return (
     <div>
       <h1>Phonebook</h1>
@@ -84,15 +82,16 @@ const App = (props) => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        {names.map(name =>
+        {namesToShow.map(name =>
           <Name key={name.content} name={name}/>
         )}
       </ul>
-      <div>
+      {/* <div>
         debug: Name=<strong>{newName}</strong>,
         exists=<strong>{exists.toString()}</strong>,
-        filter=<strong>{filter}</strong>
-      </div>
+        filter=<strong>{filter}</strong>,
+        
+      </div> */}
     </div>
   )
 }
