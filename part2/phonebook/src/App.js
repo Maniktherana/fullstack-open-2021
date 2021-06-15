@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
-
-const Name = ({ name }) => {
-  return (
-    <li>{name.content} {name.number}</li>
-  )
-}
+import Names from './components/names'
+import Form from './components/form'
+import Filter from './components/filter'
 
 const App = (props) => {
   const [names, setNames] = useState(props.names) 
@@ -12,7 +9,6 @@ const App = (props) => {
   const [newNumber, setNewNumber] = useState('')
   const [exists, setExists] = useState(false)
   const [filter, setFilter] = useState('')
-
 
   const namesToShow = names.filter(name => name.content.toLowerCase().includes(filter))
 
@@ -56,42 +52,17 @@ const App = (props) => {
     })
     setExists(tempState)
   }
+  
   return (
     <div>
       <h1>Phonebook</h1>
-      <div>
-        filter shown with: <input
-          value={filter}
-          onChange={handleFilterChange}/>
-      </div>
-      <h2>Add a new</h2>
-      <form onSubmit={addName}>
-        <div>
-          name: <input
-           value={newName}
-           onChange={handleNameChange}/>
-        </div>
-        <div>
-          number: <input
-           value={newNumber}
-           onChange={handleNumberChange}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <ul>
-        {namesToShow.map(name =>
-          <Name key={name.content} name={name}/>
-        )}
-      </ul>
-      {/* <div>
-        debug: Name=<strong>{newName}</strong>,
-        exists=<strong>{exists.toString()}</strong>,
-        filter=<strong>{filter}</strong>,
-        
-      </div> */}
+
+      <Filter filter={filter} handleFilterChange={handleFilterChange}/>
+      
+      <Form onSubmit={addName} newName={newName} newNumber={newNumber} 
+        handleNameChange={handleNameChange} handleNumberChange={handleNumberChange}/>
+
+      <Names namesToShow={namesToShow}/>
     </div>
   )
 }
