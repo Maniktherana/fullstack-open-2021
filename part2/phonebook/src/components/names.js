@@ -7,7 +7,7 @@ const Names = ({ namesToShow }) => {
             <h2>Numbers</h2>
             <ul>
                 {namesToShow.map(name =>
-                <Entry key={name.content} name={name}/>
+                <Entry key={name.name} name={name}/>
                 )}
             </ul>
         </div>

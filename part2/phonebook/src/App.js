@@ -1,16 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import Names from './components/names'
 import Form from './components/form'
 import Filter from './components/filter'
 
 const App = (props) => {
-  const [names, setNames] = useState(props.names) 
+  // const [names, setNames] = useState(props.names) 
+  const [namers, setNamers] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [exists, setExists] = useState(false)
   const [filter, setFilter] = useState('')
 
-  const namesToShow = names.filter(name => name.content.toLowerCase().includes(filter))
+  const namesToShow = namers.filter(name => name.name.toLowerCase().includes(filter))
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        setNamers(response.data)
+      })
+  }, [])
+  console.log(namers)
 
   const addName = (event) => {
     event.preventDefault()
@@ -20,11 +33,11 @@ const App = (props) => {
       alert(`${newName} has already been added to phonebook`)
     } else {
       const nameObject = {
-        content: newName,
+        name: newName,
         number: newNumber
       }
     
-      setNames(names.concat(nameObject))
+      setNamers(namers.concat(nameObject))
       setNewNumber('')
       setNewName('')
     }
@@ -45,8 +58,8 @@ const App = (props) => {
 
   const doesNameExist = (txt) => {
     let tempState = false
-    names.forEach(element => {
-      if(element.content === txt) {
+    namers.forEach(element => {
+      if(element.name === txt) {
         tempState = true
       }
     })
