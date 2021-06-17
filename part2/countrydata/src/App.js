@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const Result = ({ countriesToShow, find }) => {
+
   if (find === '') {
     return (<div></div>)
   } else if(countriesToShow.length > 10) {
@@ -15,8 +16,8 @@ const Result = ({ countriesToShow, find }) => {
       <div>
         <ul>
           {countriesToShow.map(name =>
-                  <Name key={name.name} name={name}/>
-                  )}
+                  <Name key={name.name} name={name}/> 
+                  )}  
         </ul>
       </div>
     )
@@ -25,7 +26,7 @@ const Result = ({ countriesToShow, find }) => {
       <div>
           {countriesToShow.map(name =>
                   <Data key={name.name} name={name}/>
-                  )}
+                  )} 
       </div>
     )
   } 
@@ -54,9 +55,25 @@ const Langauges = ({ lang }) => {
 }
 
 const Name = ({ name }) => {
-  return (
-    <div>{name.name}</div>
-  )
+  
+  const [show, setShow] = useState(false)
+  
+  const handleShowChange = () => {
+    setShow(!show)
+  }
+
+  if (show) {
+    return (
+      <div>
+      <Data name={name}/>
+      <button onClick={handleShowChange}>hide</button>
+      </div>
+    )
+  } else {
+    return (
+      <div>{name.name} <button onClick={handleShowChange}>show</button></div>
+    )
+  }
 }
 
 const App = () => {
