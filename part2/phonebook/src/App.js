@@ -5,7 +5,7 @@ import Form from './components/form'
 import Filter from './components/filter'
 
 const App = () => {
-  // const [names, setNames] = useState(props.names) 
+
   const [namers, setNamers] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
@@ -36,7 +36,12 @@ const App = () => {
         name: newName,
         number: newNumber
       }
-    
+      axios
+      .post('http://localhost:3001/persons', nameObject)
+      .then(response => {
+        console.log(response)
+      })
+
       setNamers(namers.concat(nameObject))
       setNewNumber('')
       setNewName('')
