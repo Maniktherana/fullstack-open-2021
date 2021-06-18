@@ -23,6 +23,7 @@ const Data = ({ name, api_key }) => {
           console.error("An error occurred: ", error)
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(hook, [])
   
     return (
