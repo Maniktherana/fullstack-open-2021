@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import Names from './components/names'
 import Form from './components/form'
 import Filter from './components/filter'
+import personService from './services/persons'
+
 
 const App = () => {
 
@@ -15,15 +16,13 @@ const App = () => {
   const namesToShow = namers.filter(name => name.name.toLowerCase().includes(filter))
 
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setNamers(response.data)
-      })
+    personService
+    .getAll()
+    .then(initialNames => {
+      setNamers(initialNames)
+    })
   }, [])
-  console.log(namers)
+  console.log(namers)  
 
   const addName = (event) => {
     event.preventDefault()
@@ -36,15 +35,13 @@ const App = () => {
         name: newName,
         number: newNumber
       }
-      axios
-      .post('http://localhost:3001/persons', nameObject)
-      .then(response => {
-        console.log(response)
+      personService
+      .create(nameObject)
+      .then(returnedName => {
+        setNamers(namers.concat(returnedName))
+        setNewNumber('')
+        setNewName('')
       })
-
-      setNamers(namers.concat(nameObject))
-      setNewNumber('')
-      setNewName('')
     }
   }
 

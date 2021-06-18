@@ -11,8 +11,6 @@ const Names = ({ namesToShow }) => {
                 )}
             </ul>
         </div>
-      
-    
     )
 }
 
