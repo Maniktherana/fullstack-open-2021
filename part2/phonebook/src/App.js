@@ -4,7 +4,7 @@ import Names from './components/names'
 import Form from './components/form'
 import Filter from './components/filter'
 
-const App = (props) => {
+const App = () => {
   // const [names, setNames] = useState(props.names) 
   const [namers, setNamers] = useState([])
   const [newName, setNewName] = useState('')
