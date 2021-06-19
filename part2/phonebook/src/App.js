@@ -45,6 +45,19 @@ const App = () => {
     }
   }
 
+  const remove = (id, name) => {
+    
+    if ( window.confirm(`Delete ${name}?`)) {
+      personService
+    .deleteContent(id)
+    setNamers(namers.filter(person => person.id !== id))
+    console.log(`deleted ${id}`)
+    } else {
+      return
+    }
+    
+  }
+
   const handleNameChange = (event) => {
     setNewName(event.target.value)
     doesNameExist(event.target.value)
@@ -77,7 +90,7 @@ const App = () => {
       <Form onSubmit={addName} newName={newName} newNumber={newNumber} 
         handleNameChange={handleNameChange} handleNumberChange={handleNumberChange}/>
 
-      <Names namesToShow={namesToShow}/>
+      <Names namesToShow={namesToShow} remove={remove}/>
     </div>
   )
 }
