@@ -53,6 +53,15 @@ Would you like to update ${newName}'s phone number?`)) {
             setErrorMessage('')
           }, 5000)
         })
+        .catch((error) => {
+          console.log(error)
+          setNewName('')
+          setNewNumber('')
+          setErrorMessage(`ERROR: ${newName} was already deleted`)
+          setTimeout(() => {
+            setErrorMessage('')
+          }, 5000)
+        })
       }
     } else {
       const nameObject = {
@@ -70,6 +79,13 @@ Would you like to update ${newName}'s phone number?`)) {
           setErrorMessage('')
         }, 5000)
       })
+      .catch((error) => {
+        setErrorMessage(`ERROR: ${error.response.data.error}`)
+        setTimeout(() => {
+          setErrorMessage('')
+          }, 5000)
+        console.log(error.response.data)
+      })
     }
   }
 
@@ -77,8 +93,17 @@ Would you like to update ${newName}'s phone number?`)) {
     if ( window.confirm(`Delete ${name}?`)) {
       personService
     .deleteContent(id)
-    setNamers(namers.filter(person => person.id !== id))
-    console.log(`deleted ${id}`)
+    .then(deletedName => {
+      setNamers(namers.filter(person => person.id !== id))
+      console.log(`deleted ${deletedName}`)
+    })
+    .catch((error) => {
+      setErrorMessage(`ERROR: ${name} was already deleted`)
+      setTimeout(() => {
+        setErrorMessage('')
+        }, 5000)
+      console.log(error)
+    })
     } else {
       return
     }
