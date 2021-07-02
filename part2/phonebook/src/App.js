@@ -25,11 +25,30 @@ const App = () => {
   console.log(namers)  
 
   const addName = (event) => {
+
     event.preventDefault()
     console.log('button clicked', event.target)
     console.log(exists)
+
+    const entries = namers.filter((person) =>
+    person.name === newName
+    )
+
+    const entryToAdd = entries[0]
+    const updatedEntry = { ...entryToAdd, number: newNumber }
+
     if (exists) {
-      alert(`${newName} has already been added to phonebook`)
+      if(window.confirm(`${newName} has already been added.
+Would you like to update ${newName}'s phone number?`)) {
+        personService
+        .update(updatedEntry.id, updatedEntry)
+        .then(returnedPerson => {
+          console.log(`Updated ${newName} with ${updatedEntry}`)
+          setNamers(namers.map(personItem => personItem.id !== entryToAdd.id ? personItem : returnedPerson))
+          setNewName('')
+          setNewNumber('')
+        })
+      }
     } else {
       const nameObject = {
         name: newName,

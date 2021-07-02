@@ -2,7 +2,7 @@
   "persons": [
     {
       "name": "Arto Hellas",
-      "number": "040-123456",
+      "number": "040-123469",
       "id": 1
     },
     {
@@ -24,7 +24,11 @@
       "name": "Kiko Maveric",
       "number": "91-92-912342",
       "id": 5
+    },
+    {
+      "name": "Jojo Beans",
+      "number": "94-12-9933",
+      "id": 6
     }
-  
   ]
 }
