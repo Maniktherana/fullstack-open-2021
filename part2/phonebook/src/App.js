@@ -46,7 +46,6 @@ const App = () => {
   }
 
   const remove = (id, name) => {
-    
     if ( window.confirm(`Delete ${name}?`)) {
       personService
     .deleteContent(id)
