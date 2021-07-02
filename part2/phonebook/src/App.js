@@ -3,7 +3,7 @@ import Names from './components/names'
 import Form from './components/form'
 import Filter from './components/filter'
 import personService from './services/persons'
-
+import Notification from './components/notification'
 
 const App = () => {
 
@@ -12,6 +12,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [exists, setExists] = useState(false)
   const [filter, setFilter] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const namesToShow = namers.filter(name => name.name.toLowerCase().includes(filter.toLowerCase()))
 
@@ -47,6 +48,10 @@ Would you like to update ${newName}'s phone number?`)) {
           setNamers(namers.map(personItem => personItem.id !== entryToAdd.id ? personItem : returnedPerson))
           setNewName('')
           setNewNumber('')
+          setErrorMessage(`${newName} was updated`)
+          setTimeout(() => {
+            setErrorMessage('')
+          }, 5000)
         })
       }
     } else {
@@ -60,6 +65,10 @@ Would you like to update ${newName}'s phone number?`)) {
         setNamers(namers.concat(returnedName))
         setNewNumber('')
         setNewName('')
+        setErrorMessage(`${newName} was added`)
+        setTimeout(() => {
+          setErrorMessage('')
+        }, 5000)
       })
     }
   }
@@ -102,12 +111,14 @@ Would you like to update ${newName}'s phone number?`)) {
     <div>
       <h1>Phonebook</h1>
 
-      <Filter filter={filter} handleFilterChange={handleFilterChange}/>
+      <Filter filter={filter} handleFilterChange={handleFilterChange} />
       
-      <Form onSubmit={addName} newName={newName} newNumber={newNumber} 
-        handleNameChange={handleNameChange} handleNumberChange={handleNumberChange}/>
+      <Notification message={errorMessage} />
 
-      <Names namesToShow={namesToShow} remove={remove}/>
+      <Form onSubmit={addName} newName={newName} newNumber={newNumber} 
+        handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} />
+
+      <Names namesToShow={namesToShow} remove={remove} />
     </div>
   )
 }
