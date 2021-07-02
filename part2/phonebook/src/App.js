@@ -13,7 +13,7 @@ const App = () => {
   const [exists, setExists] = useState(false)
   const [filter, setFilter] = useState('')
 
-  const namesToShow = namers.filter(name => name.name.toLowerCase().includes(filter))
+  const namesToShow = namers.filter(name => name.name.toLowerCase().includes(filter.toLowerCase()))
 
   useEffect(() => {
     personService
