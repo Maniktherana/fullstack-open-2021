@@ -54,7 +54,6 @@ const App = () => {
     } else {
       return
     }
-    
   }
 
   const handleNameChange = (event) => {
