@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 
+
 let persons = [
     { 
       "id": 1,
@@ -26,7 +27,15 @@ let persons = [
 
 app.get('/', (request, response) => {
     response.send('<h1>Hello World!</h1>')
-  })
+})
+
+app.get('/info', (request, response) => {
+    const date = new Date()
+    response.send(
+        `<p>The phonebook has info for ${persons.length} people</p>
+        <p>${date}</p>`
+    )
+})
 
 app.get('/api/persons', (request, response) => {
   response.json(persons)
