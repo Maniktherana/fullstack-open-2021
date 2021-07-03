@@ -12,5 +12,8 @@
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^2.0.9"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
