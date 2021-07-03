@@ -62,7 +62,7 @@ app.get('/api/persons/:id', (request, response) => {
       }
 })
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', morgan(':body'), (request, response) => {
     const body = request.body
     const personExists = persons.find(person => person.name === body.name)
 
@@ -85,7 +85,7 @@ app.post('/api/persons', (request, response) => {
     }
 
     persons = persons.concat(person)
-    // morgan.token('post', function (req) {return JSON.stringify(req.body)})
+    morgan.token('body', function (req) {return JSON.stringify(req.body)})
     response.json(person)
 })
 
