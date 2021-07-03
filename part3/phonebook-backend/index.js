@@ -105,7 +105,7 @@ app.post('/api/persons', morgan(':body'), (request, response) => {
     // }
 
     // persons = persons.concat(person)
-    // morgan.token('body', function (req) {return JSON.stringify(req.body)})
+    morgan.token('body', function (req) {return JSON.stringify(req.body)})
     // response.json(person)
 })
 
