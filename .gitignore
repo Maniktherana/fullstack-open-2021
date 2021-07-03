@@ -9,7 +9,7 @@
 **/cypress/videos/**
 
 # production
-**/build
+# **/build
 # !/part7/bloglist-backend/build
 !/part9/patientor-backend/build
 
