@@ -44,10 +44,13 @@ app.get('/', (request, response) => {
 
 app.get('/info', (request, response) => {
     const date = new Date()
-    response.send(
-        `<p>The phonebook has info for ${Person.count()} people</p>
-        <p>${date}</p>`
+    Person.find({}).then(person =>
+        response.send(
+            `<p>The phonebook has info for ${person.length} people</p>
+            <p>${date}</p>`
+        )
     )
+    
 })
 
 app.get('/api/persons', (request, response) => {
