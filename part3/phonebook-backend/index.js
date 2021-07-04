@@ -98,6 +98,8 @@ app.post('/api/persons', morgan(':body'), (request, response) => {
         response.json(savedPerson)
     })
 
+    morgan.token('body', function (req) {return JSON.stringify(req.body)})
+
     // const person = {
     //     id: generateId(),
     //     name: body.name,
@@ -105,16 +107,23 @@ app.post('/api/persons', morgan(':body'), (request, response) => {
     // }
 
     // persons = persons.concat(person)
-    morgan.token('body', function (req) {return JSON.stringify(req.body)})
     // response.json(person)
 })
 
-app.delete('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  persons = persons.filter(person => person.id !== id)
+app.delete('/api/persons/:id', (request, response, next) => {
+    Person.findByIdAndRemove(request.params.id)
+      .then(result => {
+        response.status(204).end()
+      })
+      .catch(error => next(error))
+  })
 
-  response.status(204).end()
-})
+// app.delete('/api/persons/:id', (request, response) => {
+//   const id = Number(request.params.id)
+//   persons = persons.filter(person => person.id !== id)
+
+//   response.status(204).end()
+// })
 
   
 const PORT = process.env.PORT
