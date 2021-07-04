@@ -19,11 +19,13 @@ const password = process.argv[2]
 const personSchema = new mongoose.Schema({
     name: {
         type: String,
+        minLength: 3,
         require: true,
         unique: true
         },
     number: {
         type: String,
+        minLength: 8,
         require: true,
         unique: true
         }
