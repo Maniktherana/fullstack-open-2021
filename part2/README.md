@@ -14,3 +14,4 @@ Let's continue our introduction to React. First, we will take a look at how to r
 
 * [react](https://reactjs.org/)
 * [node](https://nodejs.org/en/download/)
+* css
