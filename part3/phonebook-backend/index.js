@@ -34,9 +34,9 @@ let persons = [
     }
 ]
 
-const generateId = () => {
-    return Math.floor(Math.random() * 1000000)
-  }
+// const generateId = () => {
+//     return Math.floor(Math.random() * 1000000)
+//   }
 
 app.get('/', (request, response) => {
     response.send('<h1>Hello World!</h1>')
@@ -45,7 +45,7 @@ app.get('/', (request, response) => {
 app.get('/info', (request, response) => {
     const date = new Date()
     response.send(
-        `<p>The phonebook has info for ${persons.length} people</p>
+        `<p>The phonebook has info for ${Person.count()} people</p>
         <p>${date}</p>`
     )
 })
@@ -95,6 +95,21 @@ app.post('/api/persons', morgan(':body'), (request, response) => {
 
     morgan.token('body', function (req) {return JSON.stringify(req.body)})
 
+})
+
+app.put('/api/persons/:id', (request, response, next) => {
+    const body = request.body
+  
+    const person = {
+        name: body.name,
+        number: body.number,
+    }
+  
+    Person.findByIdAndUpdate(request.params.id, person, { new: true })
+        .then(updatedPerson => {
+            response.json(updatedPerson)
+            })
+        .catch(error => next(error))    
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {

@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/persons/60e0abce1042f06afd7ab4c0
+Content-Type: application/json
+
+{
+    "name": "Miko Kaveric",
+    "number": "69-0123123"
+}
