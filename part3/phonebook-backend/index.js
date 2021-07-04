@@ -71,11 +71,11 @@ app.get('/api/persons/:id', (request, response, next) => {
       .catch(error => next(error))
   })  
 
-app.post('/api/persons', morgan(':body'), (request, response) => {
+app.post('/api/persons', morgan(':body'), (request, response, next) => {
     const body = request.body
     const personExists = persons.find(person => person.name === body.name)
 
-    if ((!body.name || !body.number)) {
+    if ((body.name === undefined || !body.number === undefined)) {
         return response.status(400).json({ 
         error: 'content missing' 
         })
@@ -92,9 +92,12 @@ app.post('/api/persons', morgan(':body'), (request, response) => {
         number: body.number
     })
     
-    person.save().then(savedPerson => {
-        response.json(savedPerson)
-    })
+    person.save()
+        .then(savedPerson => savedPerson.toJSON())
+        .then(savedAndFormattedPerson => {
+        response.json(savedAndFormattedPerson)
+        }) 
+        .catch(error => next(error))
 
     morgan.token('body', function (req) {return JSON.stringify(req.body)})
 
@@ -135,6 +138,8 @@ const errorHandler = (error, request, response, next) => {
   
     if (error.name === 'CastError') {
         return response.status(400).send({ error: 'malformatted id' })
+    } else if (error.name === 'ValidationError') {
+        return response.status(400).json({ error: error.message })
     } 
   
     next(error)
