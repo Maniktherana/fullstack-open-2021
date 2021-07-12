@@ -22,4 +22,3 @@ $ npm start
 ```
 
 You can then access the frontend on : [http://localhost:3000/](http://localhost:3000/)
- 
