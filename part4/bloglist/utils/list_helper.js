@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+const _ = require('lodash')
+
 const dummy = (blogs) => {
 	if (blogs) {
 		return 1
@@ -10,20 +12,58 @@ const totalLikes = (blogs) => {
 	blogs.forEach(blog => {
 		tLikes = tLikes + blog.likes
 	})
-	return tLikes
+	return blogs.length === 0
+		? 0
+		: tLikes
 }
 
 const favouriteBlog = (blogs) => {
-	let maxLikes = blogs.reduce((max, game) => max.likes > game.likes ? max : game)
+	let maxLikes = blogs.reduce((max, blog) => max.likes > blog.likes ? max : blog)
+	
 	let favBlog = {}
 	favBlog.title = maxLikes.title
 	favBlog.author = maxLikes.author
 	favBlog.likes = maxLikes.likes
-	return favBlog
+	
+	return blogs.length === 0
+		? 0
+		: favBlog
+}
+
+//Helper function for mostBlogs
+const mostFrequent = arr =>
+	Object.entries(
+		arr.reduce((a, v) => {
+			a[v] = a[v] ? a[v] + 1 : 1
+			return a
+		}, {})
+	).reduce((a, v) => (v[1] >= a[1] ? v : a), [null, 0])[0]
+
+const mostBlogs = (blogs) => {
+	let blogsCount = 0
+	const blogsArr = blogs.map(blog => blog.author)
+
+	for (let i = 0; i < blogsArr.length; i++) {
+		if (blogsArr[i] === mostFrequent(blogsArr)) {
+			blogsCount += 1
+		}
+	}
+
+	let mostBlog = {}
+	mostBlog.author = mostFrequent(blogsArr)
+	mostBlog.blogs = blogsCount
+
+	return mostBlog
+}
+
+const mostLikes = (blogs) => {
+
 }
 
 module.exports = {
 	dummy,
 	totalLikes,
-	favouriteBlog
+	favouriteBlog,
+	mostBlogs,
+	mostLikes
 }
