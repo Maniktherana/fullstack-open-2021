@@ -12,9 +12,7 @@ const totalLikes = (blogs) => {
 	blogs.forEach(blog => {
 		tLikes = tLikes + blog.likes
 	})
-	return blogs.length === 0
-		? 0
-		: tLikes
+	return blogs.length === 0 ? 0 : tLikes
 }
 
 const favouriteBlog = (blogs) => {
@@ -25,9 +23,7 @@ const favouriteBlog = (blogs) => {
 	favBlog.author = maxLikes.author
 	favBlog.likes = maxLikes.likes
 	
-	return blogs.length === 0
-		? 0
-		: favBlog
+	return blogs.length === 0 ? 0 : favBlog
 }
 
 //Helper function for mostBlogs
@@ -53,11 +49,24 @@ const mostBlogs = (blogs) => {
 	mostBlog.author = mostFrequent(blogsArr)
 	mostBlog.blogs = blogsCount
 
-	return mostBlog
+	return blogs.length === 0 ? 0 : mostBlog
 }
 
 const mostLikes = (blogs) => {
+	const blogsArr = blogs.map(blog => ({author: blog.author, likes: blog.likes}))
+	const newResults = blogsArr.reduce((acc, item) => ({
+		...acc,
+		[item.author]: (acc[item.author] || 0) + item.likes
+	}) , {})
+	const finalResult = Object.keys(newResults).map(key => ({author: key, likes: newResults[key]}))
 
+	let maxLikes = finalResult.reduce((max, blog) => max.likes > blog.likes ? max : blog)
+	
+	let favBlog = {}
+	favBlog.author = maxLikes.author
+	favBlog.likes = maxLikes.likes
+
+	return blogs.length === 0 ? 0 : favBlog
 }
 
 module.exports = {

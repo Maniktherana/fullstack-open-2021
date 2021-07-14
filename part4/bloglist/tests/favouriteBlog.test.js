@@ -81,8 +81,7 @@ describe('favourite blog', () => {
 				title: 'First class tests',
 				author: 'Robert C. Martin',
 				likes: 12
-			}
-		)
+			})
 	})
 
 	test('when list has more than one blog, returns the one with most likes', () => {

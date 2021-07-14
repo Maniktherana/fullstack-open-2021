@@ -18,11 +18,10 @@ describe('favourite blog', () => {
 			{
 				author: 'Edsger W. Dijkstra',
 				blogs: 1
-			}
-		)
+			})
 	})
 
-	test('when list has more than one blog with same amount of top likes, returns the one with most likes', () => {
+	test('when list has more than one blog, returns the one with most likes', () => {
 		const blogs = [
 			{
 				_id: '5a422a851b54a676234d17f7',
