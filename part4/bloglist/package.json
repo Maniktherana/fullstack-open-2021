@@ -6,8 +6,6 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=production nodemon index.js",
-    "deploy": "git push heroku master",
-    "logs:prod": "heroku logs --tail",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
     "lint": "eslint ."
