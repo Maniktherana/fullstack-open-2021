@@ -21,6 +21,13 @@ test('blogs are returned as json', async () => {
 	  .expect(200)
 	  .expect('Content-Type', /application\/json/)
 }, 100000)
+
+test('verify if a blog has id or _id ', async () => {
+	const singleBlog = await helper.blogsInDb()
+
+	expect(singleBlog[0].id).toBeDefined()
+	expect(singleBlog[0]._id).toBe(undefined)
+})
   
 afterAll(() => {
 	mongoose.connection.close
