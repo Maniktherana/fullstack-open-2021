@@ -29,6 +29,27 @@ test('verify if a blog has id or _id ', async () => {
 	expect(singleBlog[0]._id).toBe(undefined)
 })
   
+test('new blog can be added', async () => {
+	const newBlog = {
+		title: 'Test Blog',
+		author: 'Joko Balvin',
+		url:'https://fullstackopen.com',
+		likes:5
+	}
+
+	await api
+		.post('/api/blogs')
+		.send(newBlog)
+		.expect(201)
+		.expect('Content-Type', /application\/json/)
+
+	const endBlog = await helper.blogsInDb()
+	expect(endBlog).toHaveLength(helper.initialBlogs.length + 1)
+	  
+	const titles = endBlog.map(t => t.title)
+	expect(titles[titles.length - 1]).toContain('Test Blog')
+})
+
 afterAll(() => {
 	mongoose.connection.close
 }) 
