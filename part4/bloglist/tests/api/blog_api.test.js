@@ -66,6 +66,40 @@ test('verify if the likes property is missing', async () => {
 	expect(response.body.likes).toBeDefined()
 	expect(response.body.likes).toBe(0)
 })
+
+test('verify if the title is missing', async () => {
+	const newBlogNoTitle = {
+		author: 'Jojo Beans',
+		url: 'https://fullstackopen.com/',
+		likes: 2
+	  }
+
+	await api
+	  .post('/api/blogs')
+	  .send(newBlogNoTitle)
+	  .expect(400)
+
+	const endBlog = await helper.blogsInDb()
+	expect(endBlog).toHaveLength(helper.initialBlogs.length)
+	
+}, 100000)
+
+test('verify if the url is missing', async () => {
+	const newBlogNoUrl = {
+		title: 'Test an app',
+		author: 'Jojo Beans',
+		likes: 2
+	  }
+
+	await api
+	  .post('/api/blogs')
+	  .send(newBlogNoUrl)
+	  .expect(400)
+
+	const endBlog = await helper.blogsInDb()
+	expect(endBlog).toHaveLength(helper.initialBlogs.length)
+	
+}, 100000)
   
 
 afterAll(() => {
