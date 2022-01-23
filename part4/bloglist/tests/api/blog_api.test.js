@@ -50,6 +50,24 @@ test('new blog can be added', async () => {
 	expect(titles[titles.length - 1]).toContain('Test Blog')
 })
 
+test('verify if the likes property is missing', async () => {
+	const newBlog = {
+	  title: 'Test an app',
+	  author: 'Kiko Maveric',
+	  url: 'https://fullstackopen.com/'
+	}
+  
+	const response = await api
+	  .post('/api/blogs')
+	  .send(newBlog)
+	  .expect(201)
+	  .expect('Content-Type', /application\/json/)
+  
+	expect(response.body.likes).toBeDefined()
+	expect(response.body.likes).toBe(0)
+})
+  
+
 afterAll(() => {
 	mongoose.connection.close
 }) 
