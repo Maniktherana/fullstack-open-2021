@@ -11,9 +11,9 @@ In this part, we will continue our work on the backend. Our first major theme wi
 
 ## Requirements
 
-* [jest]
-* [supertest] (https://github.com/visionmedia/supertest)
-* [express-async-errors] (https://github.com/davidbanham/express-async-errors)
-* [mongoose] (https://mongoosejs.com/)
-* [bcrypt] (https://github.com/kelektiv/node.bcrypt.js)
-* [jsonwebtoken] (https://github.com/auth0/node-jsonwebtoken)
+* [jest](https://jestjs.io/)
+* [supertest](https://github.com/visionmedia/supertest)
+* [express-async-errors](https://github.com/davidbanham/express-async-errors)
+* [mongoose](https://mongoosejs.com/)
+* [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+* [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
