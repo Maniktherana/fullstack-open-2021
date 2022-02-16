@@ -2,12 +2,14 @@ const Blog = require('../../models/blog')
 
 const initialBlogs = [
 	{
+		_id: '5a422ba71b54a676234d17fb',
 		title: 'React patterns',
 		author: 'Michael Chan',
 		url: 'https://reactpatterns.com/',
 		likes: 7,
 	},
 	{
+		_id: '5a422ba71b54a676234d17fc',
 		title: 'Go To Statement Considered Harmful',
 		author: 'Edsger W. Dijkstra',
 		url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',

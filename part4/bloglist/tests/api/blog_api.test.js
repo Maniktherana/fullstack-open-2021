@@ -50,10 +50,26 @@ test('new blog can be added', async () => {
 	expect(titles[titles.length - 1]).toContain('Test Blog')
 })
 
+test('blog can be deleted', async () => {
+	const deleteblog = {
+		_id: '5a422ba71b54a676234d17fb',
+		title: 'React patterns',
+		author: 'Michael Chan',
+		url: 'https://reactpatterns.com/',
+		likes: 7,
+	}
+
+	await api
+		.delete(`/api/blogs/${deleteblog._id}`)
+		.expect(204)
+	const blogsAtEnd = await helper.blogsInDb()
+	expect(blogsAtEnd.length).toBe(helper.initialBlogs.length - 1)
+})
+
 test('verify if the likes property is missing', async () => {
 	const newBlog = {
 	  title: 'Test an app',
-	  author: 'Kiko Maveric',
+	  author: 'Miko Kaveric',
 	  url: 'https://fullstackopen.com/'
 	}
   

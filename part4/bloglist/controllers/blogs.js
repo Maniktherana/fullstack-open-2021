@@ -14,18 +14,20 @@ blogsRouter.get('/:id', async (request, response) => {
 })
 
 blogsRouter.get('/', async (request, response) => {
-	const blog = await Blog(request.body)
-	if (blog) {
-		response.json(blog)
-	} else {
-		response.status(404).end()
-	}
+	const blogs = await Blog.find({}).populate('user', { blogs: 0 })
+	response.json(blogs)
 })
 
 blogsRouter.post('/', async (request, response) => {
 	const blog = new Blog(request.body)
 	const savedBlog = await blog.save()
 	response.status(201).json(savedBlog)
+})
+
+blogsRouter.delete('/:id', async (request, response, next) => {
+	await Blog.findByIdAndRemove(request.params.id)
+	response.status(204).end()
+
 })
 
 module.exports = blogsRouter
