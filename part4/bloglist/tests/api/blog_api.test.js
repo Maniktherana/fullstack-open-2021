@@ -66,6 +66,23 @@ test('blog can be deleted', async () => {
 	expect(blogsAtEnd.length).toBe(helper.initialBlogs.length - 1)
 })
 
+test('number of likes on a blog can be updated', async () => {
+	const allBlogs = await helper.blogsInDb()
+	const blogToBeUpdated = allBlogs[0]
+
+	const updatedLikes = {
+		likes: 100,
+	}
+
+	const updatedBlog = await api
+		.put(`/api/blogs/${blogToBeUpdated.id}`)
+		.send(updatedLikes)
+		.expect(200)
+
+	expect(updatedBlog.body.likes).toBe(updatedLikes.likes)
+
+})
+
 test('verify if the likes property is missing', async () => {
 	const newBlog = {
 	  title: 'Test an app',
