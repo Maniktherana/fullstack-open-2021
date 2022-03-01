@@ -12,3 +12,5 @@ Their curriculum can be found [here](https://fullstackopen.com/en/#course-conten
 
 ## [Solutions to Part 3](https://github.com/Maniktherana/fullstack-open-2021/tree/main/part3/phonebook-backend)
 
+## [Solutions to Part 4](https://github.com/Maniktherana/fullstack-open-2021/tree/main/part4/bloglist)
+
